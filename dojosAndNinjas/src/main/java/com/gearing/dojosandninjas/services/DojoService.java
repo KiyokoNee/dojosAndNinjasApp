@@ -34,4 +34,8 @@ public class DojoService {
 	public void deleteDojoById(Long id) {
 		dojoRepository.deleteById(id);
 	}
+	
+	public List<Object[]> joinDojoAndNinjas() {
+		return dojoRepository.joinDojosAndNinjas();
+	}
 }

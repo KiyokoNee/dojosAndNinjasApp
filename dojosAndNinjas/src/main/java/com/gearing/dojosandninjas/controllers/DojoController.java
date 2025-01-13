@@ -3,6 +3,7 @@ package com.gearing.dojosandninjas.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -73,4 +74,21 @@ public class DojoController {
 		return "redirect:/";
 	}
 
+	@GetMapping("/join")
+	public String joinedDojosAndNinjas(Model model) {
+		model.addAttribute("theJoined", dojoService.joinDojoAndNinjas());
+		
+		return "joined.jsp";
+	}
+	
+	@GetMapping("/pages/{pageNumber}")
+	public String getNinjasPerPage(Model model, @PathVariable("pageNumber") int pageNumber) {
+		Page<Ninja> ninjas = ninjaService.ninjasPerPage(pageNumber - 1);
+		
+		int totalPages = ninjas.getTotalPages();
+		model.addAttribute("ninjas", ninjas);
+		model.addAttribute("totalPages", totalPages);
+		
+		return "pagedNinjas.jsp";
+	}
 }
