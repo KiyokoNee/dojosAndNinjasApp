@@ -20,18 +20,20 @@
 <div id="ninjas">
     <h1>Ninjas</h1>
     <c:forEach begin="1" end="${totalPages}" var="index">
-        <a href="/pages/${index}">${index}</a>
+        <a href="/query/pages/${index}">${index}</a>
     </c:forEach>
     <table class="table">
         <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Dojo Name</th>
+            <th>Ninja First Name</th>
+            <th>Ninja Last Name</th>
         </thead>
         	<tbody>
             <c:forEach var="ninja" items="${ninjas.content}">                 
             <tr>
-                <td><c:out value="${ninja.fname}"></c:out></td>
-                <td><c:out value="${ninja.lname}"></c:out></td>
+                <td><c:out value="${ninja[0].name}"></c:out></td>
+                <td><c:out value="${ninja[1].fname}"></c:out></td>
+                <td><c:out value="${ninja[1].lname}"></c:out></td>
             </tr>
             </c:forEach>
         </tbody>

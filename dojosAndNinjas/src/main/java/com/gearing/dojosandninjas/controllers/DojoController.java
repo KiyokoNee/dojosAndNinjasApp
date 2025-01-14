@@ -91,4 +91,15 @@ public class DojoController {
 		
 		return "pagedNinjas.jsp";
 	}
+	
+	@GetMapping("/query/pages/{pageNumber}")
+	public String pageableQueryNinjas(Model model, @PathVariable int pageNumber) {
+		Page<Object[]> ninjas = dojoService.ninjasInDojosPerPage(pageNumber - 1);
+		
+		int totalPages = ninjas.getTotalPages();
+		model.addAttribute("ninjas", ninjas);
+		model.addAttribute("totalPages", totalPages);
+		
+		return "pageableQueryNinjas.jsp";
+	}
 }
